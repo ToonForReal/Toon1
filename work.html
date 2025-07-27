@@ -67,24 +67,51 @@
         bed_geometry.setAttribute('position', new THREE.Float32BufferAttribute(bed_vertices, 3));
         bed_geometry.computeVertexNormals();
 
-        const bed_material = new THREE.MeshStandardMaterial({ color: 0x00ff00, flatShading:false });
+        const bed_material = new THREE.MeshStandardMaterial({ color: 0x778899, flatShading:false });
         const bed_mesh = new THREE.Mesh(bed_geometry, bed_material);
         bed_mesh.castShadow = true;
         scene.add(bed_mesh);
-
+        
         // ✅ render loop
         function animate(t) {
 
-            bed_mesh.rotation.y = t * 0.001; // หมุนเตียง
+            //bed_mesh.rotation.y = t * 0.001; // หมุนเตียง
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         }
         animate(0);
 
-        window.addEventListener('keydown', (event) => {
+       window.addEventListener('keydown', () => {
+            if( event.key === 'ArrowUp' ) {
+                bed_mesh.position.y += 1;
+            }
+            else if( event.key === 'ArrowDown' ) {
+
+                bed_mesh.position.y -= 1;
+            }
+            else if( event.key === 'ArrowLeft' ) {
+                bed_mesh.position.x -= 1;
+            }
+            else if( event.key === 'ArrowRight' ) {
+                bed_mesh.position.x += 1;
+            }
 
         });
 
+        window.addEventListener('keydown', () => {
+            if( event.key === 'w' ) {
+                bed_mesh.rotation.y += 1; 
+            }
+            else if( event.key === 's' ) {
+                bed_mesh.rotation.y -= 1; 
+            }
+            else if( event.key === 'a' ) {
+                bed_meshrotation.x -= 1; 
+            }
+            else if( event.key === 'd' ) {
+                bed_mesh.rotation.x += 1; 
+            }
+        });
     </script>
 </body>
 
